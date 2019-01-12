@@ -4,52 +4,70 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-   
-    <!-- Reset Stylesheet -->
-    <link rel="stylesheet" type="text/css" href="./assets/reset.css">
+    <title>Document</title>
 
-    <!-- Bootstrap CDN -->
-   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-
-    <link rel="stylesheet" type="text/css" href="./assets/style.css">
-
-    <!-- Google Fonts -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <!--CSS Bootstrap-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/style.css">
     
-    <title>login form</title>
+
 </head>
 
 <body>
-    <div class="container-fluid">
-        <div class="row justify-content-center custom-margin">
-            <div class="col-md-4 col-sm-6">
-                <form action="#" class="shadow-lg p-4">
-                    <div class="form-group">
-                        <i class="fas fa-user"></i><label for="email" class="font-weight-bold pl-2">Email</label><input type="email" class="form-control" placeholder="email" id="email">
-                        <small class="form-text">We'll never share your email with anyone else.</small>
-                    </div>
-                    <div class="form-group">
-                            <i class="fas fa-key"></i><label for="pass" class="font-weight-bold pl-2">Password</label><input type="password" class="form-control" placeholder="password" id="pass">
-                    </div>
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id=checkboxselect>
-                        <label for="#checkboxselect" class="form-check-label">Remember me?</label>
-                    </div>
-                    <button type="submit" class="btn btn-outline-success btn-block mt-3 font-weight-bold ">Login</button>
-                </form>
-            </div>
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: rgb(1, 151, 64);">
+        <a class="navbar-brand" href="#">Date-TidBits</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Seach</a>
+            </li>
+          
+            <li class="nav-item">
+              <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+            </li>
+          </ul>
+          <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+        </div>
+      </nav>
+
+      <br>
+
+      <div id="user-panel">
+          <h3>User panel</h3>
+      </div>
+
+      <div id=center>
+
+        <div id="search-panel">
+
+            <h3>Search for a Date!</h3>
+
+            <form class="form-inline my-2 my-lg-0">
+
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 
         </div>
+        
+        <div id="history">
+          <h3>On this day in History</h3>
+        </div>
 
-    </div>
+      </div>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
-
-
-    
-
+      <div id="nyt">
+          <h3>New York Times Articles</h3>
+      </div>
 </body>
 
 </html>
