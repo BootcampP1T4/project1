@@ -1,9 +1,9 @@
 
 #user-panel{
     background-color: darkgrey;
-    width:180px;
+    width:400px;
     float: left;
-    height:500px;
+    height:665px;
     margin:15px;
     margin-left:200px;
     padding:15px;
@@ -29,7 +29,7 @@ body{
     background-color: darkgrey;
     margin:15px;
     height:150px;
-    width: 600px;
+    width: 400px;
     padding:15px;
 
 }
@@ -37,7 +37,7 @@ body{
 #history{
     background-color:darkgrey;
     margin: 15px;
-    height:600px;
+    height:500px;
     padding:15px;
 }
 
@@ -45,8 +45,8 @@ body{
     background-color: darkgrey;
     margin:15px;
     float:left;
-    height:700px;
-    width:600px;
+    height:665px;
+    width:400px;
     padding:15px;
 }
 
