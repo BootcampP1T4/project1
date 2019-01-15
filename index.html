@@ -3,7 +3,7 @@
 
 <head>
     <!-- jQuery -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
@@ -11,12 +11,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
         crossorigin="anonymous">
-    <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="assets/a.css">
     <!-- Firebase Reference -->
-<script src="https://www.gstatic.com/firebasejs/5.7.3/firebase.js"></script>
-<!-- Moment.js -->
-<script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.7.3/firebase.js"></script>
+    <!-- Moment.js -->
+    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Date-TidBits</title>
@@ -37,11 +38,11 @@
                             <a href="#home">home</a>
                         </li>
                         <li>
-                            <a href="#search">search</a>
+                            <a href="#search">B.D.search</a>
                         </li>
-                        <li>
+                        <!-- <li>
                             <a href="#Disabled">Disabled</a>
-                        </li>
+                        </li> -->
                     </ul>
                 </div>
             </div>
@@ -52,11 +53,11 @@
             <a href="#home">home</a>
         </li>
         <li>
-            <a href="#search">search</a>
+            <a href="#search">B.D.search</a>
         </li>
-        <li>
+        <!-- <li>
             <a href="#Disabled">Disabled</a>
-        </li>
+        </li> -->
     </ul>
     <!--Section: slider-->
     <section class="slider">
@@ -86,11 +87,18 @@
         </ul>
     </section>
     <!--Section: Search-->
-    <section class="section section-search teal darken-1 white-text center scrollspy">
-        <div class="container">
+    <section class="section teal darken-1 white-text center">
+        <div class="container " id="birthday">
             <div class="row">
                 <div class="col-lg-4 col-md-3 text-right hidden-xs hidden-sm">
-                    <h3>Date of birth</h3>
+                    <form class="col s6" id="birthday">
+                        <h2>Date of birth</h2>
+                        <input type="date" class="datepicker" width="200px">
+                        <button class="btn waves-effect waves-light" id="search" type="submit" name="action">Search
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </form>
+
                 </div>
             </div>
         </div>
@@ -101,9 +109,9 @@
             <div class="col s12 m4">
                 <div class="card">
                     <div class="card-image">
-                        <img src="assets/img/firebase.png" alt="">
+                        <img src="assets/img/question.jpg" alt="">
                     </div>
-                    <a class="waves-effect waves-light btn-large">firebase</a>
+                    <a class="waves-effect waves-light btn-large">See what others are finding</a>
 
                 </div>
 
