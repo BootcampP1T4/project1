@@ -25,7 +25,7 @@ let historyObj = {
     births: [],
     deaths: []
 };
-
+/*
 //ready js
 $(document).ready(function () {
 
@@ -41,3 +41,4 @@ $(document).ready(function () {
     
     //end ready js
 });
+*/
