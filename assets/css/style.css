@@ -1,56 +1,7 @@
-
-#user-panel{
-    background-color: darkgrey;
-    width:400px;
-    float: left;
-    height:665px;
-    margin:15px;
-    margin-left:200px;
-    padding:15px;
-    opacity:50%;
-
-}
-
-body{
-    color:white;
-    background-image:url("../images/background.jpg");
-    background-repeat: no-repeat;
-
-}
-
-#center{
-   
-    width:1300;
-    float:left;
-    
-}
-
-#search-panel{
-    background-color: darkgrey;
-    margin:15px;
-    height:150px;
-    width: 400px;
-    padding:15px;
-
-}
-
-#history{
-    background-color:darkgrey;
-    margin: 15px;
-    height:500px;
-    padding:15px;
-}
-
-#nyt{
-    background-color: darkgrey;
-    margin:15px;
-    float:left;
-    height:665px;
-    width:400px;
-    padding:15px;
-}
-
-.navbar-brand{
-    font-size:30px;
-    font-weight:bolder;
+.main{
+    padding: 1px !important;
+    font-size: 10px !important;
+    width:40% !important;
+    border: white 3px solid !important;
+    float:left !important;
 }
