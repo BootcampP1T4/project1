@@ -1,17 +1,18 @@
 //function for nyt api call, must input "YYYYMMDD". Returns an array with objects inside that holds web url, headline, and snippet.
 function nytdata(inputDate) {
   let returnArray = [];
-  var url = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
+  var url = "https://cors-anywhere.herokuapp.com/https://api.nytimes.com/svc/search/v2/articlesearch.json";
   url += '?' + $.param({
-    'api-key': "b9f91d369ff59547cd47b931d8cbc56b:0:74623931",
+    'api-key': "2RFlsMjGt55kuosoq0pTUEU2ZMzMJA6R",
     'begin_date': inputDate,
     'end_date': inputDate,
     'fl': "web_url, snippet, headline"
   });
-  $.ajax({
+  return $.ajax({
     url: url,
     method: 'GET',
-  }).done(function (result) {
+    //.then used to wait for the return of promise
+  }).then(function (result) {
     for (let i1 = 0; i1 < result.response.docs.length; i1++) {
       let dataObj = result.response.docs[i1];
       let returnObj = {
@@ -21,11 +22,11 @@ function nytdata(inputDate) {
       };
       returnArray.push(returnObj);
     };
+    return returnArray;
   }).fail(function (err1) {
     throw err1;
   });
-  console.log(returnArray);
-  return returnArray;
+ 
 };
 
 
