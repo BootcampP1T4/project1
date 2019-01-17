@@ -17,8 +17,7 @@ function nytdata(inputDate) {
       let dataObj = result.response.docs[i1];
       let returnObj = {
         web_url: dataObj.web_url,
-        headline: dataObj.headline.main,
-        snippet: dataObj.snippet
+        headline: dataObj.headline.main
       };
       returnArray.push(returnObj);
     };
@@ -26,7 +25,6 @@ function nytdata(inputDate) {
   }).fail(function (err1) {
     throw err1;
   });
- 
 };
 
 
@@ -34,19 +32,18 @@ function nytdata(inputDate) {
 function giphydata(inputName) {
   let returnGifObj = {};
   let queryURL = "https://api.giphy.com/v1/gifs/search?api_key=1iThDCkeb2A5dgCTRBPi2BGTzcgjjBpt&limit=10&q=" + inputName;
-  $.ajax({
-      url: queryURL,
-      method: "GET"
-  }).done(function (response) {
-      let results = response.data;
-      let randInd = Math.floor(Math.random() * results.length);
-      returnGifObj = {
-          still: results[randInd].images.fixed_height_still.url,
-          ani: results[randInd].images.fixed_height.url
-      };
+  return $.ajax({
+    url: queryURL,
+    method: "GET"
+  }).then(function (response) {
+    let results = response.data;
+    let randInd = Math.floor(Math.random() * results.length);
+    returnGifObj = {
+      still: results[randInd].images.fixed_height_still.url,
+      ani: results[randInd].images.fixed_height.url
+    };
+    return (returnGifObj);
   }).fail(function (err2) {
-      throw err2;
+    throw err2;
   });
-  console.log(returnGifObj);
-  return(returnGifObj);
 };
