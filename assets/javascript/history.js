@@ -28,7 +28,6 @@ let historyObj = {
 /*
 //ready js
 $(document).ready(function () {
-
     // pass dynamically from front end
     let month = 8;
     let day = 9;
