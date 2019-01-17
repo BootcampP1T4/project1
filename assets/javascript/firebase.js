@@ -26,14 +26,17 @@ $(document).ready(function () {
     dataRef.ref("nyt").orderByChild("dateAdded").limitToLast(1).on("child_added", function (snapshot) {
         let shareArray = snapshot.val().dataArray;
         let shareDate = snapshot.val().searchdate;
+        let shareName = snapshot.val().username;
         let div = $("<div class='card-panel'>")
-        let datehead = $("<h5>").text(moment(shareDate, "YYYYMMDD").format("MMMM Do YYYY"))
+        let userhead = $("<h5>").text(shareName + " shares:")
+        let datehead = $("<h6>").text("NYT articles from " + moment(shareDate, "YYYYMMDD").format("MMMM Do YYYY"))
         for (let i3 = 0; i3 < shareArray.length; i3++) {
             let link = $("<a href='" + shareArray[i3].web_url + "' target='_blank'>" + shareArray[i3].headline + "</a>")
             let linkdiv = $("<div style='margin-top:10px'>").append(link);
             div.append(linkdiv);
         }
         div.prepend(datehead);
+        div.prepend(userhead);
         $("#share").prepend(div);
     }, function (error) {
         console.log("error:" + error);
