@@ -36,9 +36,6 @@
             <li>
               <a href="#search">B.D.search</a>
             </li>
-            <!-- <li>
-                            <a href="#Disabled">Disabled</a>
-                        </li> -->
           </ul>
         </div>
       </div>
@@ -51,22 +48,26 @@
     <li>
       <a href="#search">B.D.search</a>
     </li>
-    <!-- <li>
-            <a href="#Disabled">Disabled</a>
-        </li> -->
   </ul>
   <!--Section: slider-->
   <section class="slider">
     <ul class="slides">
+        <li>
+            <img src="./assets/images/birthday1.jpg">
+            <div class="caption right-align">
+              <h3 style="color:black" ;>Check Out Anything In Any Favorite Day</h3>
+              <h5 style="color:black" ;>This Day In History</h5>
+            </div>
+          </li>
       <li>
-        <img src="assets/images/birthda2.jpg"> <!-- random image -->
+        <img src="assets/images/birthda2.jpg">
         <div class="caption center-align">
           <h3 style="color:black" ;>Your Favorite Day Check Out</h3>
           <h5 style="color:black" ;>Famous Birthday and Events</h5>
         </div>
       </li>
       <li>
-        <img src="assets/images/birthday3.jpg"> <!-- random image -->
+        <img src="assets/images/birthday3.jpg">
         <div class="caption left-align">
           <h3 style="color:red" ;>Imagine What Happening In your Day</h3>
           <h5 style="color:red" ;>Follow What Happen In Any Given
@@ -74,7 +75,7 @@
         </div>
       </li>
       <li>
-        <img src="assets/images/birthday4.jpg"> <!-- random image -->
+        <img src="assets/images/birthday4.jpg">
         <div class="caption right-align">
           <h3 style="color:black" ;>Check Out Anything In Any Favorite Day</h3>
           <h5 style="color:black" ;>This Day In History</h5>
@@ -86,19 +87,19 @@
   <section class="section teal darken-1 white-text center">
     <div class="container">
       <div class="row">
-        <div class="text-right hidden-xs hidden-sm">
-
+        <div class="col s5">
+          <input value="" id="name" type="text" class="validate">
+          <label class="active" for="first_name2">First Name</label>
+        </div>
+         <div class="col s5">
           <form class="col s6">
-            <div class="col-lg-6 col-md-6">
-              <input value="" id="name" type="text" class="validate">
-              <label class="active" for="first_name2">First Name</label>
-            </div>
-            <div class="col-lg-6 col-md-6">
-              <input type="date" class="col-lg-6 col-md-6 datepicker" id="date" width="200px">
-              <button class="btn waves-effect waves-light" id="search" type="submit" name="action">Search
-                <i class="material-icons right">send</i>
-              </button>
+            <input type="date" class="col-lg-6 col-md-6 datepicker" id="date" width="200px">
           </form>
+        </div>
+        <div class="col s2" id="M">
+          <button class="btn waves-effect waves-light" id="search" type="submit" name="action">Search
+            <i class="material-icons right">send</i>
+          </button>
         </div>
       </div>
     </div>
@@ -110,7 +111,7 @@
       <div class="col s12 m4">
         <div class="card">
           <div class="card-image">
-            <img src="./assets/images/question.jpg" alt="">
+            <img src="./assets/images/question.jpg " id="image" alt="">
           </div>
           <a class="waves-effect waves-light btn-large">See what others are finding</a>
         </div>
@@ -122,7 +123,7 @@
       <div class="col s12 m4">
         <div class="card">
           <div class="card-image">
-            <img src="./assets/images/NYT.jpg" alt="">
+            <img src="./assets/images/NYT.jpg" id="image" alt="">
           </div>
           <a class="waves-effect waves-light btn-large">NYT</a>
         </div>
@@ -133,7 +134,7 @@
       <div class="col s12 m4">
         <div class="card">
           <div class="card-image">
-            <img src="./assets/images/events.jpg" alt="">
+            <img src="./assets/images/events.jpg" id="image" alt="">
           </div>
           <a class="waves-effect waves-light btn-large">EVENT</a>
         </div>
@@ -171,7 +172,6 @@
       transition: 300,
       interval: 7000
     });
-
   </script>
   <script src="assets/javascript/frontend.js"></script>
   <script src="assets/javascript/history.js"></script>
