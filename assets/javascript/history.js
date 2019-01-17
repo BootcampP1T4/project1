@@ -25,10 +25,9 @@ let historyObj = {
     births: [],
     deaths: []
 };
-
+/*
 //ready js
 $(document).ready(function () {
-
     // pass dynamically from front end
     let month = 8;
     let day = 9;
@@ -41,3 +40,4 @@ $(document).ready(function () {
     
     //end ready js
 });
+*/
