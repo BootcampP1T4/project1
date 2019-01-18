@@ -9,24 +9,27 @@
   <!-- Compiled and minified CSS -->
   <link rel="stylesheet" href="./assets/css/reset.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
-    crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
   <link rel="stylesheet" href="./assets/css/style.css">
-  <!-- Firebase Reference -->
+  <!--Firebase-->
+  <!--
   <script src="https://www.gstatic.com/firebasejs/5.7.3/firebase.js"></script>
-
+  -->
+  <script src="https://www.gstatic.com/firebasejs/5.7.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.7.3/firebase-database.js"></script>
   <!--Let browser know website is optimized for mobile-->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Date-TidBits</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>What had happened was...</title>
 </head>
 
 <body id="home" class="scrollspy">
+  <base target="_blank">
   <!--Navbar-->
   <div class="navbar-fixed">
     <nav class="teal">
       <div class="container">
         <div class="nav-wrapper">
-          <a href="#" class="brand-logo">Date-TidBits</a>
+          <a href="#" class="brand-logo">What had happened was...</a>
           <a href="#" data-target="mobile-nav" class="sidenav-trigger">
             <i class="material-icons">menu</i>
           </a>
@@ -103,9 +106,12 @@
           </button>
         </div>
       </div>
+      <!--end row-->
     </div>
-    </div>
+    <!--end container-->
   </section>
+  <!--end section-->
+
   <!--Section: Info-->
   <div class="container">
     <div class="row">
@@ -147,38 +153,22 @@
   </div>
   <!--Footer-->
   <footer class="section teal darken-2 white-text center">
-    <p class="flow-text">Date-TidBits &copy; 2019</p>
+    <p class="flow-text">What had happened was... &copy; 2019</p>
   </footer>
 
   <!-- Moment.js -->
   <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-    crossorigin="anonymous"></script>
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
   <!-- jQuery -->
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
   <!-- Compiled and minified JavaScript -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-  <script>
-    //sidenav
-    const sideNav = document.querySelector('.sidenav');
-    M.Sidenav.init(sideNav, {});
 
-    //Slider
-    const slider = document.querySelector('.slider');
-    M.Slider.init(slider, {
-      indicators: false,
-      height: 300,
-      transition: 300,
-      interval: 7000
-    });
-  </script>
-  <script src="assets/javascript/frontend.js"></script>
+  <!--Site specific JS-->  
   <script src="assets/javascript/history.js"></script>
   <script src="assets/javascript/nyt.js"></script>
   <script src="assets/javascript/firebase.js"></script>
-  <script src="assets/javascript/backend.js"></script>
+  <script src="assets/javascript/frontend.js"></script>
 </body>
 
 </html>
