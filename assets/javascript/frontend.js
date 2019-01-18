@@ -2,7 +2,7 @@
 $(document).ready(function () {
 
     //onclick function to add content to nyt div
-    $("#search").on("click", function (event) {
+    $("#searchBREAK").on("click", function (event) {
         event.preventDefault();
         let indate = $("#date").val();
         indate = indate.replace("-", "");
