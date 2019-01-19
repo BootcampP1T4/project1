@@ -1,4 +1,4 @@
-//function for nyt api call, must input "YYYYMMDD". Returns an array with objects inside that holds web url, headline, and snippet.
+//function for nyt api call, must input "YYYYMMDD". Returns an array with objects inside that holds web url & headline.
 function nytdata(inputDate, page) {
   let returnArray = [];
   var url = "https://cors-anywhere.herokuapp.com/https://api.nytimes.com/svc/search/v2/articlesearch.json";

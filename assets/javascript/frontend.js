@@ -63,10 +63,11 @@ $(document).ready(function () {
             let searchMonth = parseInt(moment(dateSearched, "YYYY-MM-DD").format("M"));
             let searchDay = parseInt(moment(dateSearched, "YYYY-MM-DD").format("D"));
             console.log(dateSearched, searchMonth, searchDay);
+            $("#history").prepend($("<div class='card-panel'>").prepend($("<h4>Loading Data...</h4>"))); //Holds place with message "Loading Data..." until api call completes
             getHistory(month, day).then(function () {
                 console.log(historyObj);
-                postHistory("history");
-                postHistory("nyt");
+                postHistory("history", true);
+                postHistory("nyt", true);
             });
         };
     });
@@ -74,27 +75,32 @@ $(document).ready(function () {
     // add to html to force all links to open in new tab
     // <base target="_blank">
     //post API response to DOM
-    function postHistory(id) {
+    function postHistory(id, valid) {
         if (id == "#history") {
             let card = $("<div class='card-panel'>");
             $.each(historyObj.events, function (index, value) {
+                let button;
                 //console.log(value);
+                if (valid) {
+                    button = `<button id="history-btn-${index}" class="history-btn" type="button">share</button>`
+                }
                 card.append(`
                     <div id="history-${index}" class="sharedItem section">    
-                        <button id="history-btn-${index}" class="history-btn" type="button">share</button>
+                        ${button}
                         ${value.year} - ${value.html}
                     </div>
                 `);
             });
             let dateheader = $("<h6>").text("Historical events on " + moment(month, "M").format("MMM") + " " + moment(day, "D").format("Do"));
             card.prepend(dateheader);
+            $(id).empty();
             $(id).prepend(card);
         } else if (id == "nyt") {
             // Aaron's code
             let indate = $("#date").val();
             indate = indate.replace("-", "");
             indate = indate.replace("-", "");
-            nytdiv(indate);
+            nytdiv(indate, valid);
         };
     };
 
@@ -110,8 +116,8 @@ $(document).ready(function () {
         */
 
     //function that gets the data using nytdata and manipulates DOM
-    function nytdiv(enterdate) {
-        $("#nyt").prepend($("<div class='card-panel'>").prepend($("<h4>Loading Data...</h4>")));
+    function nytdiv(enterdate, valid) {
+        $("#nyt").prepend($("<div class='card-panel'>").prepend($("<h4>Loading Data...</h4>"))); //Holds place with message "Loading Data..." until api call completes
         //.then used to wait for call function
         nytdata(enterdate, 0).then(function (artArray1) {
             nytdata(enterdate, 1).then(function (artArray2) {
@@ -128,7 +134,9 @@ $(document).ready(function () {
                     let sharebtn = $("<button class='shareThis'>share</button>");
                     sharebtn.attr("data-array", JSON.stringify(artobject));
                     let linkdiv = $("<div style='margin-top:20px'>");
-                    linkdiv.append(sharebtn);
+                    if (valid) {
+                        linkdiv.append(sharebtn);
+                    };
                     linkdiv.append(link);
                     div.append(linkdiv);
                 }
@@ -140,12 +148,13 @@ $(document).ready(function () {
         });
     };
 
-    nytdiv(moment().format("YYYYMMDD"));
+    nytdiv(moment().format("YYYYMMDD"), false);
 
     // make API call on page load using current date
     let month = moment().format("M");
     let day = moment().format("D");
     console.log(month, day);
+    $("#history").prepend($("<div class='card-panel'>").prepend($("<h4>Loading Data...</h4>"))); //Holds place with message "Loading Data..." until api call completes
     //$.when(getHistory(month, day)).done(function () { //change to .done to .then and remove .when
     getHistory(month, day).then(function () {
         console.log(historyObj);
