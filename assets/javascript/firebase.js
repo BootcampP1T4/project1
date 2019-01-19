@@ -10,9 +10,9 @@ $(document).ready(function () {
         storageBucket: "bootcampp1t4.appspot.com",
         messagingSenderId: "250848158957"
     };
-    firebase.initializeApp(config);
 
-    let dataRef = firebase.database();
+    firebase.initializeApp(config);
+    let db = firebase.database();
 
     //onclick function to push data into firebase
     $(document).on("click", ".shareThis", function () {
@@ -22,27 +22,50 @@ $(document).ready(function () {
             dataObj.userName = "Anonymous"
         }
         dataObj.dateAdded = firebase.database.ServerValue.TIMESTAMP;
-        dataRef.ref("sharedData").push(dataObj);
+        db.ref("sharedData").push(dataObj);
     })
 
 
     //function to populate div wit the last child added
-    dataRef.ref("sharedData").orderByChild("dateAdded").limitToLast(5).on("child_added", function (snapshot) {
+    db.ref("sharedData").orderByChild("dateAdded").limitToLast(5).on("child_added", function (snapshot) {
+        let datehead = ""
         let shareLink = snapshot.val().userShared;
         let shareDate = snapshot.val().dateSearched;
         let shareName = snapshot.val().userName;
         let div = $("<div class='card-panel'>");
-        let userhead = $("<h5>").text(shareName + " shares:");
-        let datehead = $("<h6>").text("NYT article from " + moment(shareDate, "YYYYMMDD").format("MMMM Do YYYY"));
-        let link = $(shareLink);
+        if (snapshot.val().api === "nyt") {
+            datehead = $("<h6>").text(shareName + " shared a NYT article from " + moment(shareDate, "YYYYMMDD").format("MMM D YYYY"));
+        } else if (snapshot.val().api === "history") {
+            datehead = $("<h6>").text(shareName + " shared an event from " + moment(shareDate, "YYYYMMDD").format("MMM D YYYY"));
+        }
+        let link = $("<div>").html(shareLink);
         let linkdiv = $("<div style='margin-top:10px'>").append(link);
         div.append(linkdiv);
         div.prepend(datehead);
-        div.prepend(userhead);
         $("#share").prepend(div);
     }, function (error) {
         console.log("error:" + error);
     });
+
+    //post to firebase
+    function shareHistory(index) {
+        db.ref("sharedData").push({
+            api: "history",
+            dateAdded: moment().valueOf(), // .unix(),
+            dateSearched: moment(dateSearched, "YYYY-MM-DD").format("YYYYMMDD"),
+            userName: userName,
+            userShared: historyObj.events[index].html
+        });
+        console.log(historyObj);
+    }
+
+    $(document).on("click", ".history-btn", function (event) {
+        let id = $(this).attr("id");
+        id = id.substring(12, id.length);
+        //console.log("id", id);
+        shareHistory(id);
+    });
+
 
 
     //end ready js
