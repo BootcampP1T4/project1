@@ -4,10 +4,6 @@ let dateSearched = moment().format("YYYY-MM-DD");
 let snapshotFirebase = {};
 
 //ready js
-
-//Variables to hold full alphabet and array to split them
-var alphabet = "abcdefghijklmnopqrstuvwxyz ";
-
 $(document).ready(function () {
 
     //sidenav
@@ -66,28 +62,30 @@ $(document).ready(function () {
         if (isValid[0] == false) {
             // invalid username
             $("#invalidName").text("Invalid username: Enter up to 12 characters - letters & numbers only");
-        } else if (isValid[1] == false) {
+        }
+        if (isValid[1] == false) {
             // invalid date
             $("#invalidDate").text("Invalid date: Enter a current or historical date");
-        } else {
+            return;
+        }
+        if (isValid[0] && isValid[1]) {
             // parse date and make API call
             let searchMonth = parseInt(moment(dateSearched, "YYYY-MM-DD").format("M"));
             let searchDay = parseInt(moment(dateSearched, "YYYY-MM-DD").format("D"));
             console.log(dateSearched, searchMonth, searchDay);
+            $("#nyt").prepend($("<div class='card-panel'>").prepend($("<h4>Loading Data...</h4>"))); //Holds place with message "Loading Data..." until api call completes
             $("#history").prepend($("<div class='card-panel'>").prepend($("<h4>Loading Data...</h4>"))); //Holds place with message "Loading Data..." until api call completes
+            postAPI("nyt", true);
             getHistory(searchMonth, searchDay).then(function () {
                 console.log(historyObj);
-                postHistory("history", true);
-                postHistory("nyt", true);
+                $("#history").empty();
+                postAPI("history", true);                
             });
         };
     });
 
-    // add to html to force all links to open in new tab
-    // <base target="_blank">
-    //post API response to DOM
-    function postHistory(id, valid) {
-        if (id == "#history") {
+    function postAPI(id, valid) {
+        if (id == "history") {
             let card = $("<div class='card-panel'>");
             $.each(historyObj.events, function (index, value) {
                 let button;
@@ -102,53 +100,51 @@ $(document).ready(function () {
                     </div>
                 `);
             });
-            let dateheader = $("<h6>").html("Historical events on " + moment(month, "M").format("MMM") + " " + moment(day, "D").format("Do"));
-            card.prepend(dateheader);
-            $(id).empty();
-            $(id).prepend(card);
+            let dateHeader = $("<h6>").html("Historical events: " + moment(dateSearched, "YYYY-MM-DD").format("MMM") + " " + moment(dateSearched, "YYYY-MM-DD").format("Do"));
+            card.prepend(dateHeader);           
+            $("#history").prepend(card);
         } else if (id == "nyt") {
             // Aaron's code
-            let indate = $("#date").val();
-            indate = indate.replace("-", "");
-            indate = indate.replace("-", "");
-            nytdiv(indate, valid);
+            let formDate = $("#date").val();
+            formDate = formDate.replace("-", "");
+            formDate = formDate.replace("-", "");
+            postNYT(formDate, valid);
         };
     };
 
-    //function that gets the data using nytdata and manipulates DOM
-    function nytdiv(enterdate, valid) {
-        $("#nyt").prepend($("<div class='card-panel'>").prepend($("<h4>Loading Data...</h4>"))); //Holds place with message "Loading Data..." until api call completes
+    //function that gets the data using getNYT and manipulates DOM
+    function postNYT(enterDate, valid) {        
         //.then used to wait for call function
-        nytdata(enterdate, 0).then(function (artArray1) {
-            nytdata(enterdate, 1).then(function (artArray2) {
-                let artArray = artArray1.concat(artArray2);
-                let div = $("<div class='card-panel'>");
-                let datehead = $("<h6>").text("NYT articles from " + moment(enterdate, "YYYYMMDD").format("MMM Do YYYY"))
-                for (let i3 = 0; i3 < artArray.length; i3++) {
-                    let link = $("<a href='" + artArray[i3].web_url + "' target='_blank'> " + artArray[i3].headline + "</a>");
-                    let artobject = {
+        getNYT(enterDate, 0).then(function (NYTArray1) {
+            getNYT(enterDate, 1).then(function (NYTArray2) {
+                let NYTArray = NYTArray1.concat(NYTArray2);
+                let card = $("<div class='card-panel'>");
+                let datehead = $("<h6>").text("NYT articles: " + moment(enterDate, "YYYYMMDD").format("MMM D, YYYY"))
+                for (let articleCounter = 0; articleCounter < NYTArray.length; articleCounter++) {
+                    let link = $("<a href='" + NYTArray[articleCounter].web_url + "' target='_blank'> " + NYTArray[articleCounter].headline + "</a>");
+                    let NYTObject = {
                         api: "nyt",
-                        dateSearched: enterdate,
-                        userShared: "<a href='" + artArray[i3].web_url + "' target='_blank'>" + artArray[i3].headline + "</a>"
+                        dateSearched: enterDate,
+                        userShared: "<a href='" + NYTArray[articleCounter].web_url + "' target='_blank'>" + NYTArray[articleCounter].headline + "</a>"
                     };
                     let sharebtn = $("<button class='shareThis'>share</button>");
-                    sharebtn.attr("data-array", JSON.stringify(artobject));
-                    let linkdiv = $("<div style='margin-top:20px'>");
+                    sharebtn.attr("data-array", JSON.stringify(NYTObject));
+                    let contentLink = $("<div style='margin-top:20px'>");
                     if (valid) {
-                        linkdiv.append(sharebtn);
+                        contentLink.append(sharebtn);
                     };
-                    linkdiv.append(link);
-                    div.append(linkdiv);
-                }
-
-                div.prepend(datehead);
-                $("#nyt").empty();
-                $("#nyt").prepend(div);
+                    contentLink.append(link);
+                    card.append(contentLink);
+                };                
+                card.prepend(datehead);
+                $("#nyt").empty();                
+                $("#nyt").prepend(card);
             });
         });
     };
 
-    nytdiv(moment().format("YYYYMMDD"), false);
+    $("#nyt").prepend($("<div class='card-panel'>").prepend($("<h4>Loading Data...</h4>"))); //Holds place with message "Loading Data..." until api call completes
+    postNYT(moment().format("YYYYMMDD"), false);
 
     // make API call on page load using current date
     let month = moment().format("M");
@@ -158,7 +154,7 @@ $(document).ready(function () {
     //$.when(getHistory(month, day)).done(function () { //change to .done to .then and remove .when
     getHistory(month, day).then(function () {
         console.log(historyObj);
-        postHistory("#history");
+        postAPI("history", false);
     });
 
 

@@ -14,38 +14,35 @@ $(document).ready(function () {
     firebase.initializeApp(config);
     let db = firebase.database();
 
-    //onclick function to push data into firebase
-    $(document).on("click", ".shareThis", function () {
-        let dataObj = JSON.parse($(this).attr("data-array"));
-        dataObj.userName = $("#name").val();
-        if (dataObj.userName === "") {
-            dataObj.userName = "Anonymous"
-        }
-        dataObj.dateAdded = firebase.database.ServerValue.TIMESTAMP;
-        db.ref("sharedData").push(dataObj);
-    })
-
-
-    //function to populate div wit the last child added
-    db.ref("sharedData").orderByChild("dateAdded").limitToLast(5).on("child_added", function (snapshot) {
-        let datehead = ""
-        let shareLink = snapshot.val().userShared;
-        let shareDate = snapshot.val().dateSearched;
-        let shareName = snapshot.val().userName;
-        let div = $("<div class='card-panel'>");
-        if (snapshot.val().api === "nyt") {
-            datehead = $("<h6>").text(shareName + " shared a NYT article from " + moment(shareDate, "YYYYMMDD").format("MMM D YYYY"));
-        } else if (snapshot.val().api === "history") {
-            datehead = $("<h6>").text(shareName + " shared an event from " + moment(shareDate, "YYYYMMDD").format("MMM D YYYY"));
-        }
-        let link = $("<div>").html(shareLink);
-        let linkdiv = $("<div style='margin-top:10px'>").append(link);
-        div.append(linkdiv);
-        div.prepend(datehead);
-        $("#share").prepend(div);
+    let shareMax = 20;
+    let snapshotArray = [];
+    db.ref("sharedData").orderByChild("dateAdded").limitToLast(shareMax).on("child_added", function (snapshot) {
+        snapshotArray.unshift(snapshot.val());
+        console.log(snapshotArray); 
+        if (snapshotArray.length > shareMax) {
+            snapshotArray.splice(shareMax,1)
+        }       
+        postShare();        
     }, function (error) {
         console.log("error:" + error);
     });
+
+    function postShare() {
+        $("#share").empty();
+        for (let i = 0; i < snapshotArray.length; i++) {
+            let dateHeader = "";
+            let card = $("<div class='card-panel'>");
+            if (snapshotArray[i].api === "nyt") {
+                dateHeader = $("<h6>").text(snapshotArray[i].userName + " shared a NYT article from " + moment(snapshotArray[i].dateSearched, "YYYYMMDD").format("MMM D, YYYY"));
+            } else if (snapshotArray[i].api === "history") {
+                dateHeader = $("<h6>").text(snapshotArray[i].userName + " shared an event from " + moment(snapshotArray[i].dateSearched, "YYYYMMDD").format("MMM D, YYYY"));
+            }
+            let sharedContent ="<div style='margin-top:10px'>" + snapshotArray[i].userShared + "</div>";
+            card.append(sharedContent);
+            card.prepend(dateHeader);
+            $("#share").append(card);
+        };
+    };
 
     //post to firebase
     function shareHistory(index) {
@@ -57,7 +54,18 @@ $(document).ready(function () {
             userShared: historyObj.events[index].html
         });
         console.log(historyObj);
-    }
+    };
+
+    //onclick function to push data into firebase
+    $(document).on("click", ".shareThis", function () {
+        let sharedObj = JSON.parse($(this).attr("data-array"));
+        sharedObj.userName = $("#name").val();
+        if (sharedObj.userName === "") {
+            sharedObj.userName = "Anonymous"
+        }
+        sharedObj.dateAdded = firebase.database.ServerValue.TIMESTAMP;
+        db.ref("sharedData").push(sharedObj);
+    });
 
     $(document).on("click", ".history-btn", function (event) {
         let id = $(this).attr("id");
@@ -65,8 +73,6 @@ $(document).ready(function () {
         //console.log("id", id);
         shareHistory(id);
     });
-
-
-
+    
     //end ready js
 });
