@@ -79,7 +79,6 @@ $(document).ready(function () {
             $("#history").empty();
             let card = $("<div class='card-panel'>");
             $.each(historyObj.events, function (index, value) {
-                console.log(value);
                 let button = "";
                 if (valid) {
                     button = `<button id="history-btn-${index}" class="history-btn" type="button">share</button>`
