@@ -1,17 +1,52 @@
 //ready js
+
+//Variables to hold full alphabet and array to split them
+var alphabet = "abcdefghijklmnopqrstuvwxyz ";
+
 $(document).ready(function () {
 
-    let username = "";
+$(".namealert").hide();
+$(".datealert").hide();
 
+    let username = "";
+    
     //onclick function to add content to nyt div
     $("#search").on("click", function (event) {
         event.preventDefault();
+        
 
+        //Testing purposes
+        $(".namealert").hide();
+        $(".datealert").hide();
+        
         username = $("#name").val();
         let indate = $("#date").val();
-        indate = indate.replace("-", "");
-        indate = indate.replace("-", "");
-        nytdiv(indate);        
+        let test = $("#name").val();
+        
+        console.log(test);
+        let array = test.split("");
+        let datearray = indate.split("-");
+
+        array.forEach(function (char){
+
+            if (!alphabet.includes(char)){
+                $(".namealert").show('');
+            }
+            else if(datearray[0]>2019 && datearray[1]> 01 && datearray[2]>17){
+                $(".datealert").show();
+
+            }
+            else{
+              
+                indate = indate.replace("-", "");
+                indate = indate.replace("-", "");
+                nytdiv(indate);   
+            };
+        });
+
+  
+        //Grab Values for Username and Date
+             
     });
 
     //function that gets the data using nytdata and manipulates DOM
