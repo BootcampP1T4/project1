@@ -5,7 +5,7 @@ function getHistory(month, day) {
     return $.ajax({
         url: queryURL,
         method: "GET",
-        //}).done(function (response) { //change .done to .then
+    //.then used to wait for the return of promise
     }).then(function (response) {
         response = JSON.parse(response);
         historyObj.date = response.date;
@@ -16,7 +16,6 @@ function getHistory(month, day) {
         throw err;
     });
 };
-
 
 //global object containing returned history API data
 let historyObj = {

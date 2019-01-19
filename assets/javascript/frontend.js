@@ -20,14 +20,10 @@ $(document).ready(function () {
 
     //validation of username and date from front end gui
     function validation(testName, testDate) {
-        console.log("testname:" + testName);
-        console.log("testdate:" + testDate);
         let regex = /^[A-Za-z0-9_]+$/;
-        console.log("reg", regex.test(testName));
         if (regex.test(testName) &&
             testName.length > 0 &&
             testName.length <= 12) {
-            // do nothing
         } else {
             testName = false;
         }
@@ -42,8 +38,6 @@ $(document).ready(function () {
             testMonth <= 12 &&
             testDay >= 1 &&
             testDay <= 31) {
-            // do nothing
-            console.log(testDate)
         } else {
             testDate = false;
         }
@@ -54,9 +48,7 @@ $(document).ready(function () {
         event.preventDefault();
         userName = $("#name").val();
         dateSearched = $("#date").val();
-        console.log("search:", userName, dateSearched);
         let isValid = validation(userName, dateSearched);
-        console.log("valid", isValid)
         $("#invalidName").empty()
         $("#invalidDate").empty()
         if (isValid[0] == false) {
@@ -72,12 +64,10 @@ $(document).ready(function () {
             // parse date and make API call
             let searchMonth = parseInt(moment(dateSearched, "YYYY-MM-DD").format("M"));
             let searchDay = parseInt(moment(dateSearched, "YYYY-MM-DD").format("D"));
-            console.log(dateSearched, searchMonth, searchDay);
             $("#nyt").prepend($("<div class='card-panel'>").prepend($("<h4>Loading Data...</h4>"))); //Holds place with message "Loading Data..." until api call completes
             $("#history").prepend($("<div class='card-panel'>").prepend($("<h4>Loading Data...</h4>"))); //Holds place with message "Loading Data..." until api call completes
             postAPI("nyt", true);
             getHistory(searchMonth, searchDay).then(function () {
-                console.log(historyObj);
                 $("#history").empty();
                 postAPI("history", true);                
             });
@@ -86,10 +76,11 @@ $(document).ready(function () {
 
     function postAPI(id, valid) {
         if (id == "history") {
+            $("#history").empty();
             let card = $("<div class='card-panel'>");
             $.each(historyObj.events, function (index, value) {
-                let button;
-                //console.log(value);
+                console.log(value);
+                let button = "";
                 if (valid) {
                     button = `<button id="history-btn-${index}" class="history-btn" type="button">share</button>`
                 }
@@ -104,7 +95,6 @@ $(document).ready(function () {
             card.prepend(dateHeader);           
             $("#history").prepend(card);
         } else if (id == "nyt") {
-            // Aaron's code
             let formDate = $("#date").val();
             formDate = formDate.replace("-", "");
             formDate = formDate.replace("-", "");
@@ -114,7 +104,7 @@ $(document).ready(function () {
 
     //function that gets the data using getNYT and manipulates DOM
     function postNYT(enterDate, valid) {        
-        //.then used to wait for call function
+        // call getNYT twice to get 2 sets, NYT only allows 10 results per call
         getNYT(enterDate, 0).then(function (NYTArray1) {
             getNYT(enterDate, 1).then(function (NYTArray2) {
                 let NYTArray = NYTArray1.concat(NYTArray2);
@@ -143,20 +133,19 @@ $(document).ready(function () {
         });
     };
 
-    $("#nyt").prepend($("<div class='card-panel'>").prepend($("<h4>Loading Data...</h4>"))); //Holds place with message "Loading Data..." until api call completes
+    //"Loading Data..." placeholder until api call completes
+    $("#nyt").prepend($("<div class='card-panel'>").prepend($("<h4>Loading Data...</h4>")));
     postNYT(moment().format("YYYYMMDD"), false);
 
     // make API call on page load using current date
     let month = moment().format("M");
     let day = moment().format("D");
-    console.log(month, day);
-    $("#history").prepend($("<div class='card-panel'>").prepend($("<h4>Loading Data...</h4>"))); //Holds place with message "Loading Data..." until api call completes
-    //$.when(getHistory(month, day)).done(function () { //change to .done to .then and remove .when
+
+    //"Loading Data..." placeholder until api call completes
+    $("#history").prepend($("<div class='card-panel'>").prepend($("<h4>Loading Data...</h4>")));
+    
     getHistory(month, day).then(function () {
-        console.log(historyObj);
         postAPI("history", false);
     });
-
-
     //end ready js
 });
