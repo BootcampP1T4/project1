@@ -25,25 +25,3 @@ let historyObj = {
     births: [],
     deaths: []
 };
-
-//ready js
-$(document).ready(function () {
-    /*
-    // post x most recent Firebase
-    let ref = firebase.database().ref("history");
-    ref.orderByChild("dateAdded").limitToLast(3).on("child_added", function (dbQuery) {
-        console.log("share", dbQuery.val());
-        $("#share").empty();
-        $.each(dbQuery.history, function (index, value) {
-            console.log(value);
-            $(id).append(`
-                <div id="history-${index}" class="sharedItem section">    
-                    <button id="history-btn-${index}" class="history-btn" type="button">share</button>
-                    ${value.year} - ${value.html}
-                </div>
-            `);
-        });
-    });
-    */
-   
-}); //end ready js

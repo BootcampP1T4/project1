@@ -24,10 +24,13 @@ $(document).ready(function () {
 
     //validation of username and date from front end gui
     function validation(testName, testDate) {
+        console.log("testname:" + testName);
+        console.log("testdate:" + testDate);
         let regex = /^[A-Za-z0-9_]+$/;
+        console.log("reg", regex.test(testName));
         if (regex.test(testName) &&
-            testName.len > 0 &&
-            testName.len <= 12) {
+            testName.length > 0 &&
+            testName.length <= 12) {
             // do nothing
         } else {
             testName = false;
@@ -44,6 +47,7 @@ $(document).ready(function () {
             testDay >= 1 &&
             testDay <= 31) {
             // do nothing
+            console.log(testDate)
         } else {
             testDate = false;
         }
@@ -56,19 +60,22 @@ $(document).ready(function () {
         dateSearched = $("#date").val();
         console.log("search:", userName, dateSearched);
         let isValid = validation(userName, dateSearched);
+        console.log("valid", isValid)
+        $("#invalidName").empty()
+        $("#invalidDate").empty()
         if (isValid[0] == false) {
             // invalid username
-            $("#name").attr("placeholder", "12 characters - letters & numbers only");
+            $("#invalidName").text("Invalid username: Enter up to 12 characters - letters & numbers only");
         } else if (isValid[1] == false) {
             // invalid date
-            $("#date").attr("value", "choose a date from the datepicker calendar");
+            $("#invalidDate").text("Invalid date: Enter a current or historical date");
         } else {
             // parse date and make API call
             let searchMonth = parseInt(moment(dateSearched, "YYYY-MM-DD").format("M"));
             let searchDay = parseInt(moment(dateSearched, "YYYY-MM-DD").format("D"));
             console.log(dateSearched, searchMonth, searchDay);
             $("#history").prepend($("<div class='card-panel'>").prepend($("<h4>Loading Data...</h4>"))); //Holds place with message "Loading Data..." until api call completes
-            getHistory(month, day).then(function () {
+            getHistory(searchMonth, searchDay).then(function () {
                 console.log(historyObj);
                 postHistory("history", true);
                 postHistory("nyt", true);
@@ -95,7 +102,7 @@ $(document).ready(function () {
                     </div>
                 `);
             });
-            let dateheader = $("<h6>").text("Historical events on " + moment(month, "M").format("MMM") + " " + moment(day, "D").format("Do"));
+            let dateheader = $("<h6>").html("Historical events on " + moment(month, "M").format("MMM") + " " + moment(day, "D").format("Do"));
             card.prepend(dateheader);
             $(id).empty();
             $(id).prepend(card);
@@ -107,17 +114,6 @@ $(document).ready(function () {
             nytdiv(indate, valid);
         };
     };
-
-    /*
-        //onclick function to add content to nyt div
-        $("#search").on("click", function (event) {
-            event.preventDefault();
-            let indate = $("#date").val();
-            indate = indate.replace("-", "");
-            indate = indate.replace("-", "");
-            nytdiv(indate);
-        });
-        */
 
     //function that gets the data using nytdata and manipulates DOM
     function nytdiv(enterdate, valid) {
