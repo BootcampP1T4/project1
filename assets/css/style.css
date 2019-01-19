@@ -5,6 +5,7 @@
     border: white 3px solid !important;
     float:left !important;
 }
+
 #M{
     padding-top: 40px;
     left: 0px;
@@ -12,7 +13,4 @@
 #image{
     width:200px;
     height:99px;
-}
-divide{
-    float: left;
 }
