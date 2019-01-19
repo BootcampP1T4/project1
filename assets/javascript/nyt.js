@@ -1,4 +1,5 @@
-//function for nyt api call, must input "YYYYMMDD". Returns an array with objects inside that holds web url & headline.
+//nyt api call must input "YYYYMMDD"
+//returns array of objects with properties for web url & headline
 function getNYT(inputDate, page) {
   let nytArray = [];
   var url = "https://cors-anywhere.herokuapp.com/https://api.nytimes.com/svc/search/v2/articlesearch.json";
@@ -12,7 +13,7 @@ function getNYT(inputDate, page) {
   return $.ajax({
     url: url,
     method: 'GET',
-    //.then used to wait for the return of promise
+  //.then used to wait for the return of promise
   }).then(function (result) {
     for (let i1 = 0; i1 < result.response.docs.length; i1++) {
       let nytObj = result.response.docs[i1];
