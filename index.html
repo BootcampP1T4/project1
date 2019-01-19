@@ -18,8 +18,8 @@
   <script src="https://www.gstatic.com/firebasejs/5.7.3/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/5.7.3/firebase-database.js"></script>
   <!--Let browser know website is optimized for mobile-->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>What had happened was...</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>What Had Happened Was...</title>
 </head>
 
 <body id="home" class="scrollspy">
@@ -29,17 +29,15 @@
     <nav class="teal">
       <div class="container">
         <div class="nav-wrapper">
-          <a href="#" class="brand-logo">What had happened was...</a>
+          <a href="#" class="brand-logo">What Had Happened Was...</a>
           <a href="#" data-target="mobile-nav" class="sidenav-trigger">
             <i class="material-icons">menu</i>
           </a>
           <ul class="right hide-on-med-and-down">
             <li>
-              <a href="#home">home</a>
+              <a href="#home">Home</a>
             </li>
-            <li>
-              <a href="#search">B.D.search</a>
-            </li>
+
           </ul>
         </div>
       </div>
@@ -47,71 +45,62 @@
   </div>
   <ul class="sidenav" id="mobile-nav">
     <li>
-      <a href="#home">home</a>
-    </li>
-    <li>
-      <a href="#search">B.D.search</a>
+      <a href="#home">Home</a>
     </li>
   </ul>
-  <!--Section: slider-->
-  <section class="slider">
-    <ul class="slides">
-        <li>
-            <img src="./assets/images/birthday1.jpg">
-            <div class="caption right-align">
-              <h3 style="color:black" ;>Check Out Anything In Any Favorite Day</h3>
-              <h5 style="color:black" ;>This Day In History</h5>
-            </div>
-          </li>
-      <li>
-        <img src="assets/images/birthda2.jpg">
-        <div class="caption center-align">
-          <h3 style="color:black" ;>Your Favorite Day Check Out</h3>
-          <h5 style="color:black" ;>Famous Birthday and Events</h5>
+  <div class="container">
+    <div class="row" id="divide">
+      <div class="col s5">
+        <div class="slider">
+          <ul class="slides">
+            <li>
+              <img src="./assets/images/birthday1.jpg">
+              <div class="caption right-align">
+              </div>
+            </li>
+            <li>
+              <img src="./assets/images/birthday2.jpg">
+              <div class="caption center-align">
+              </div>
+            </li>
+            <li>
+              <img src="./assets/images/birthday3.jpg">
+              <div class="caption left-align">
+              </div>
+            </li>
+            <li>
+              <img src="./assets/images/birthday4.jpg">
+              <div class="caption right-align">
+              </div>
+            </li>
+          </ul>
         </div>
-      </li>
-      <li>
-        <img src="assets/images/birthday3.jpg">
-        <div class="caption left-align">
-          <h3 style="color:red" ;>Imagine What Happening In your Day</h3>
-          <h5 style="color:red" ;>Follow What Happen In Any Given
-            Date With NYT</h5>
+      </div>
+      <br>
+      <br>
+      <div class="col s7">
+        <input value="" id="name" type="text" class="validate">
+        <label class="active" for="first_name2">Username</label>
+        <div id="invalidName">
         </div>
-      </li>
-      <li>
-        <img src="assets/images/birthday4.jpg">
-        <div class="caption right-align">
-          <h3 style="color:black" ;>Check Out Anything In Any Favorite Day</h3>
-          <h5 style="color:black" ;>This Day In History</h5>
-        </div>
-      </li>
-    </ul>
-  </section>
-  <!--Section: Search-->
-  <section class="section teal darken-1 white-text center">
-    <div class="container">
-      <div class="row">
-        <div class="col s5">
-          <input value="" id="name" type="text" class="validate">
-          <label class="active" for="first_name2">First Name</label>
-        </div>
-         <div class="col s5">
-          <form class="col s6">
-            <input type="date" class="col-lg-6 col-md-6 datepicker" id="date" width="200px">
-          </form>
-        </div>
-        <div class="col s2" id="M">
-          <button class="btn waves-effect waves-light" id="search" type="submit" name="action">Search
-            <i class="material-icons right">send</i>
-          </button>
-        </div>
+        <br>
+        <form>
+          <br>
+          <input type="date" class="col-lg-6 col-md-6 datepicker" id="date" width="200px">
+          <label class="active" for="first_name2">Date</label>
+          <div id="invalidDate">
+          </div>
+          <br>
+        </form>
+        <button class="btn waves-effect waves-light btn-large" id="search" type="submit" name="action">Search
+          <i class="material-icons right">send</i>
+        </button>
       </div>
       <!--end row-->
     </div>
-    <!--end container-->
-  </section>
-  <!--end section-->
-
+    <!--end row-->
+  </div>
+  <!--end container-->
   <!--Section: Info-->
   <div class="container">
     <div class="row">
@@ -153,7 +142,7 @@
   </div>
   <!--Footer-->
   <footer class="section teal darken-2 white-text center">
-    <p class="flow-text">What had happened was... &copy; 2019</p>
+    <p class="flow-text">What Had Happened Was... &copy; 2019</p>
   </footer>
 
   <!-- Moment.js -->

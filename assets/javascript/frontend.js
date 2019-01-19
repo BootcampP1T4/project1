@@ -4,6 +4,10 @@ let dateSearched = moment().format("YYYY-MM-DD");
 let snapshotFirebase = {};
 
 //ready js
+
+//Variables to hold full alphabet and array to split them
+var alphabet = "abcdefghijklmnopqrstuvwxyz ";
+
 $(document).ready(function () {
 
     //sidenav
