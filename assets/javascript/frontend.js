@@ -33,7 +33,7 @@ $(document).ready(function () {
         let testMonth = parseInt(moment(testDate, "YYYY-MM-DD").format("M"));
         let testDay = parseInt(moment(testDate, "YYYY-MM-DD").format("D"));
         if (testDate <= currentDate &&
-            testYear >= 1930 &&
+            testYear >= 1981 &&
             testMonth >= 1 &&
             testMonth <= 12 &&
             testDay >= 1 &&
@@ -57,7 +57,7 @@ $(document).ready(function () {
         }
         if (isValid[1] == false) {
             // invalid date
-            $("#invalidDate").text("Invalid date: Enter a current or historical date");
+            $("#invalidDate").text("Invalid date: Enter a current or historical date after 1981");
             return;
         }
         if (isValid[0] && isValid[1]) {
