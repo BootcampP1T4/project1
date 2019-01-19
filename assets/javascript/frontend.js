@@ -1,4 +1,8 @@
 //ready js
+
+//Variables to hold full alphabet and array to split them
+var alphabet = "abcdefghijklmnopqrstuvwxyz ";
+
 $(document).ready(function () {
 
     //onclick function to add content to nyt div
